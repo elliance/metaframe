@@ -62,12 +62,10 @@ body .notes h2 {
   padding: 20px 0 20px 0;
   color: #2998c7;
 }
-body .notes .note-count {
-  display: block;
-  font-family: Arial, Helvetica, san-serif;
-  margin-bottom: 20px;
+body .notes .note-holder {
+  padding-bottom: 25px;
 }
-body .notes .note-count span {
+body .notes .note-count {
   width: 20px;
   height: 24px;
   display: block;
@@ -97,6 +95,12 @@ body .notes span {
 }
 body .notes #noteBox {
   margin-top: 20px;
+}
+body .notes .note-body {
+  display: block;
+  font-family: Arial, Helvetica, san-serif;
+  display: block;
+  padding-left: 45px;
 }
 body .notes-tab {
   position: fixed;

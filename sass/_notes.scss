@@ -63,31 +63,29 @@ right: -330px;
 
 	// Note listing
 
+	.note-holder 
+	{
+	padding-bottom: 25px;
+	}
+
 	.note-count 
 	{
+	width: 20px;
+	height: 24px;
 	display: block;
-	font-family: Arial, Helvetica, san-serif;
-	margin-bottom: 20px;
+	float: left;
+	@include button-gradient;
+	border-radius: 24px;
+	z-index: 95;
+	color: #fff;
+	box-shadow: 0 0px 15px 0 #333;
+	font-weight: 600;
+	text-align: center;
+	padding: 5px 5px 0px 5px;
+	margin-right: 10px;
+	top: -5px;
+	position: relative;
 
-		span 
-		{
-		width: 20px;
-		height: 24px;
-		display: block;
-		float: left;
-		@include button-gradient;
-		border-radius: 24px;
-		z-index: 95;
-		color: #fff;
-		box-shadow: 0 0px 15px 0 #333;
-		font-weight: 600;
-		text-align: center;
-		padding: 5px 5px 0px 5px;
-		margin-right: 10px;
-		top: -5px;
-		position: relative;
-
-		}
 	}
 	span 
 	{
@@ -97,8 +95,15 @@ right: -330px;
 	#noteBox 
 	{
 	margin-top: 20px;
-
 	}
+
+		.note-body 
+		{
+		display: block;
+		font-family: Arial, Helvetica, san-serif;
+		display: block;
+		padding-left: 45px;
+		}
 
 
 }

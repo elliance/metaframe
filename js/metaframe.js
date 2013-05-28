@@ -37,7 +37,7 @@ $(document).ready(function () {
 
     // Auto-numbering the notes    
     for (var i = 0; i < noteCount - 0; i++) {
-        $('.notes').append('<span class="note-count">' + '<span>' + (i+1) + '</span>' + tn_array[i] + '</span>');
+        $('.notes').append('<div class="note-holder">' + '<span class="note-count">' + (i+1) + '</span>' +'<span class="note-body">' + tn_array[i] + '</span>' + '</div');
         }
 
     // Function defined for right panel
