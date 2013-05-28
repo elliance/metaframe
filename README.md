@@ -16,7 +16,7 @@ Here's what it would look like:
 
     <section class="features notation" note="By default, this section will contain the three most recent featured stories.">
 
-####Example
+######Example
 And here's what it looks like in a real, live "web page": http://parroccini.com/misc/wireframe/
 
 ##How it works
