@@ -13,7 +13,7 @@ class="notation" note="[your note here, but without the brackets]". You don't ha
 Example:
 Let's say you want to annotate a <section> on your page with the text, "By default, this section will contain the three most recent featured stories." And let's say the display styles for this section are in the CSS pseudoclass called "features". 
 Here's what it would look like: 
-  <section class="features notation" note="By default, this section will contain the three most recent featured stories.">
+  <pre><section class="features notation" note="By default, this section will contain the three most recent featured stories."></pre>
 
 
 How it works:
