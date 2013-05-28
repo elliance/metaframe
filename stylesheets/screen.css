@@ -1,0 +1,233 @@
+body {
+  counter-reset: notesCounter;
+}
+body .hide {
+  display: none;
+}
+body .notes-anchor {
+  width: 45px;
+  height: 36px;
+  display: block;
+  background: #00b7ea;
+  background: -moz-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #00b7ea), color-stop(100%, #009ec3));
+  background: -webkit-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
+  background: -o-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
+  background: -ms-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
+  background: linear-gradient(to bottom, #00b7ea 0%, #009ec3 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 );
+  border-radius: 10px;
+  position: absolute;
+  border-radius: 50px;
+  z-index: 95;
+  color: #fff;
+  box-shadow: 1px 3px 7px 0 #333;
+  font-weight: 600;
+  margin-top: -10px;
+  margin-left: -10px;
+  text-align: center;
+  padding: 10px 0 0 0 !important;
+}
+body .notes-anchor figure {
+  counter-increment: notesCounter;
+  font-size: 1.8em;
+}
+body .notes-anchor figure:before {
+  content: counter(notesCounter);
+}
+body .notes {
+  width: 300px;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  background: #333333;
+  border-left: 10px solid #00b7ea;
+  opacity: .98;
+  height: 100%;
+  color: #fff;
+  padding: 15px;
+  overflow: auto;
+  right: -330px;
+}
+body .notes h1 {
+  font-size: 2em;
+  font-weight: 600;
+  font-family: Arial, Helvetica, san-serif;
+  color: #CCC;
+}
+body .notes h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  font-family: Arial, Helvetica, san-serif;
+  padding: 20px 0 20px 0;
+  color: #2998c7;
+}
+body .notes .note-count {
+  display: block;
+  font-family: Arial, Helvetica, san-serif;
+  margin-bottom: 20px;
+}
+body .notes .note-count span {
+  width: 20px;
+  height: 24px;
+  display: block;
+  float: left;
+  background: #00b7ea;
+  background: -moz-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #00b7ea), color-stop(100%, #009ec3));
+  background: -webkit-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
+  background: -o-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
+  background: -ms-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
+  background: linear-gradient(to bottom, #00b7ea 0%, #009ec3 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 );
+  border-radius: 10px;
+  border-radius: 24px;
+  z-index: 95;
+  color: #fff;
+  box-shadow: 0 0px 15px 0 #333;
+  font-weight: 600;
+  text-align: center;
+  padding: 5px 5px 0px 5px;
+  margin-right: 10px;
+  top: -5px;
+  position: relative;
+}
+body .notes span {
+  color: #fff;
+}
+body .notes #noteBox {
+  margin-top: 20px;
+}
+body .notes-tab {
+  position: fixed;
+  z-index: 99;
+  background-color: #00b7ea;
+  display: block;
+  width: 25px;
+  padding-top: 10px;
+  padding-left: 10px;
+  top: 50%;
+  right: 10px;
+  -moz-border-radius-topleft: 10px;
+  -webkit-border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 70px;
+  background-image: url(../images/notes-v.png);
+  background-position: 15px 17px;
+  background-repeat: no-repeat;
+  color: #fff;
+  text-decoration: none;
+}
+@media screen and (max-width: 700px) {
+  body .bottom {
+    right: auto !important;
+  }
+  body .notes {
+    width: 100%;
+    height: 300px;
+    bottom: -330px;
+    right: auto;
+    overflow: auto;
+    top: auto;
+    border-top: 10px solid #00b7ea;
+    border-left: none;
+  }
+  body .notes-tab {
+    width: 100px;
+    height: 5px;
+    bottom: 10px;
+    background-image: url(../images/notes-h.png);
+    background-position: 25px 15px;
+    left: 40%;
+    text-align: center;
+    padding: 15px 0 10px 0;
+    top: auto;
+    border-bottom-left-radius: 0 !important;
+    -moz-border-radius-topleft: 10px;
+    -webkit-border-top-left-radius: 10px;
+    border-top-left-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -webkit-border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+    right: auto;
+  }
+}
+body ::-webkit-scrollbar {
+  width: 12px;
+}
+body ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #333;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+body ::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #666;
+}
+body ::-webkit-scrollbar-thumb:window-inactive {
+  background: #CCC;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+body {
+  font-family: Arial, Helvetica, san-serif;
+}

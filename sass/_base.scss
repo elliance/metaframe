@@ -1,0 +1,45 @@
+//Breakpoint
+$notes: 700px;
+
+//Colors 
+$notes-panel: #333;
+$blue-title: #2998c7;
+
+
+//Mixins
+
+@mixin main-tytle-style {
+	font-size: 2em;
+	font-weight: 600;
+	font-family: Arial, Helvetica, san-serif;
+	color: #CCC;
+}
+   
+@mixin sub-title-style {
+	font-size: 1.5em;
+	font-weight: 600;
+	font-family: Arial, Helvetica, san-serif;
+	padding: 20px 0 20px 0;
+	color: $blue-title;
+}
+
+@mixin username-style {
+	display: block;
+	padding-bottom: 5px;
+	font-weight: 600;
+	font-family: Arial, Helvetica, san-serif;
+	color: $yellow;
+}
+
+@mixin button-gradient {
+	background: #00b7ea; 
+	background: -moz-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00b7ea), color-stop(100%,#009ec3));
+	background: -webkit-linear-gradient(top, #00b7ea 0%,#009ec3 100%); 
+	background: -o-linear-gradient(top, #00b7ea 0%,#009ec3 100%); 
+	background: -ms-linear-gradient(top, #00b7ea 0%,#009ec3 100%);
+	background: linear-gradient(to bottom, #00b7ea 0%,#009ec3 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 ); 
+	border-radius: 10px;
+}
+
