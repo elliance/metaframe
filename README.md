@@ -19,4 +19,4 @@ Here's what it would look like:
 ##How it works
 Metaframe crawls the DOM looking for instances of the class, "notation" and, when it finds one, it uses magic to add the subsequent contents of "notes" to the panel overlay.
 
-©2013 Elliance, Inc. - Creative Commons Attribution Sharealike 3.0 Unported http://creativecommons.org/licenses/by-sa/3.0/
+######©2013 Elliance, Inc. - Creative Commons Attribution Sharealike 3.0 Unported http://creativecommons.org/licenses/by-sa/3.0/
