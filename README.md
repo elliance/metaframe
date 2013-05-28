@@ -3,7 +3,7 @@ metaframe
 
 Metaframe is an easy-to-use notation layer for conveying the meta-knowledge in wireframes, mockups, and design comps. Made and shared with love by the folks at Elliance.
 
-###Installation
+##Installation
 To install, simply reference the CSS and JS files in this package from your wireframe page HTML. The CSS contains a reset (compass reset) in addition to the note styles.
 
 ###Use
