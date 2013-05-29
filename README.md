@@ -21,4 +21,7 @@ And here's what it looks like in a real, live web page: http://metaframe.ellianc
 ##How it works
 Metaframe crawls the DOM looking for instances of the class, "notation" and, when it finds one, it uses magic to add the subsequent contents of "notes" to the panel overlay.
 
+##Known Issues
+Mama mia! Metaframe's not a-workin so well in IE8 or earlier!
+
 ######©2013 Elliance, Inc. http://elliance.com - Creative Commons Attribution Sharealike 3.0 Unported http://creativecommons.org/licenses/by-sa/3.0/
