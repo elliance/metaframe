@@ -5,13 +5,13 @@ $(document).ready(function () {
 
     // Generate Notes Tab
     $('<a/>', {
-        class: 'notes-tab',
+        'class': 'notes-tab',
         href: '#'
     }).appendTo('body');
 
     // Generate Notes Panel 
     $('<div/>', {
-        class: 'notes'
+        'class': 'notes'
     }).appendTo('body');
 
     // Get Page Title
@@ -32,7 +32,6 @@ $(document).ready(function () {
     var tn_array = $(".notation").map(function() {
         noteCount++;
         return $(this).attr("note");
-      
     });
 
     // Auto-numbering the notes    
@@ -40,20 +39,28 @@ $(document).ready(function () {
         $('.notes').append('<div class="note-holder">' + '<span class="note-count">' + (i+1) + '</span>' +'<span class="note-body">' + tn_array[i] + '</span>' + '</div');
         }
 
-    // Function defined for right panel
+    // add HTML to classes marked with .notation
+    var noteNum = 0;
+    $('.notation').each(function() {
+        noteNum++;
+        $(this).prepend('<span class="notes-anchor"><figure>' + (noteNum) +'</figure></span>');
+    });
+
+    // Function defined for right panelD
     // Start in closed position
     function OverlayControlright() {
 
-      $(".notes-tab").click(function(e) {
+      $(".notes-anchor, .notes-tab").click(function(e) {
         e.preventDefault();
-        if(!$(this).hasClass('open')) {
+
+        if(!$('.notes-tab').hasClass('open')) {
              $(".notes").animate({right:'0px'}, 300);
              $(".notes-tab").animate({right:'340px'}, 300);
-             $(this).addClass('open');
+             $('.notes-tab').addClass('open');
         } else {
              $(".notes").animate({right:'-330px'}, 300);
              $(".notes-tab").animate({right:'10px'}, 300);
-             $(this).removeClass('open');
+             $('.notes-tab').removeClass('open');
             }
         });
     }
@@ -62,16 +69,16 @@ $(document).ready(function () {
     // Start in closed position   
     function OverlayControldown() {
 
-      $(".notes-tab").click(function(e) {
+      $(".notes-anchor, .notes-tab").click(function(e) {
         e.preventDefault();
-        if(!$(this).hasClass('open')) {
+        if(!$('.notes-tab').hasClass('open')) {
              $(".notes").animate({bottom:'0px'}, 300);
              $(".notes-tab").animate({bottom:'340px'}, 300);
-             $(this).addClass('open');             
+             $('.notes-tab').addClass('open');             
         } else {
             $(".notes").animate({bottom:'-330px'}, 300);
              $(".notes-tab").animate({bottom:'10px'}, 300);
-             $(this).removeClass('open');
+             $('.notes-tab').removeClass('open');
             }
         });
     }
@@ -106,11 +113,6 @@ $(document).ready(function () {
             $('.notes').addClass('bottom');
             OverlayControldown(); 
         }
-
-        // add HTML to classes marked with .notation
-        $('.notation').each(function() {
-            $(this).prepend('<span class="notes-anchor"><figure></figure></span>');
-        });
 
         // hide note anchors on check
         $('#noteBox').click(function() {

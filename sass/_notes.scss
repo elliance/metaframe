@@ -2,7 +2,7 @@
 
 // Note anchor
 body {
-	counter-reset: notesCounter;
+//	counter-reset: notesCounter;
 
 	.hide 
 	{
@@ -15,8 +15,9 @@ width: 45px;
 height: 36px;
 display: block;
 @include button-gradient;
+cursor: pointer;
 position: absolute;
-border-radius: 50px;
+@include border-radius(50px);
 z-index: 95;
 color: #fff;
 box-shadow: 1px 3px 7px 0 #333;
@@ -28,12 +29,13 @@ padding: 10px 0 0 0 !important;
 
 	figure 
 	{
-	counter-increment: notesCounter;
-	font-size: 1.8em;
+	// counter-increment: notesCounter;
+	font-size: 26px;
+	line-height: 100%;
 
 		&:before 
 		{
-		content: counter(notesCounter);
+		// content: counter(notesCounter);
 		}
 	}
 }
@@ -47,7 +49,6 @@ z-index: 99;
 top: 0;
 background: $notes-panel;
 border-left: 10px solid #00b7ea;
-
 opacity: .98;
 height: 100%;
 color: #fff;
@@ -74,8 +75,8 @@ right: -330px;
 	height: 24px;
 	display: block;
 	float: left;
+	@include border-radius(24px);
 	@include button-gradient;
-	border-radius: 24px;
 	z-index: 95;
 	color: #fff;
 	box-shadow: 0 0px 15px 0 #333;
@@ -104,8 +105,6 @@ right: -330px;
 		display: block;
 		padding-left: 45px;
 		}
-
-
 }
 
 // "View notes" Tab
@@ -113,7 +112,6 @@ right: -330px;
 .notes-tab 
 {
 	position: fixed;
-	
 	z-index: 99;
 	background-color: #00b7ea;
 	display: block;
@@ -198,3 +196,5 @@ right: -330px;
 	background: #CCC; 
 	}
 }
+
+
