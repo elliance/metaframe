@@ -119,6 +119,7 @@ $(document).ready(function () {
         $('.notes-anchor').toggle();
     });
 
+        // if no notes exist, show the message
         if ($('.note-body').size() === 0) {
             $('.notes').append('<p>' + 'There are no notes yet. I guess you can go home early today!' + '</p>');
         }
