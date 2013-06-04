@@ -98,6 +98,7 @@ body .notes .note-body {
   display: block;
   font-family: Arial, Helvetica, san-serif;
   display: block;
+  line-height: 1.4em;
   padding-left: 45px;
 }
 body .notes-tab {
