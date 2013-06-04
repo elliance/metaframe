@@ -60,6 +60,7 @@ body .notes h2 {
 }
 body .notes .note-holder {
   padding-bottom: 25px;
+  width: 95%;
 }
 body .notes .note-count {
   width: 20px;

@@ -89,7 +89,7 @@ $(document).ready(function () {
         
         $('.notes-tab').removeClass('open');
         $('.notes-tab').unbind('click');
-      if ($(window).width() > 800) 
+      if ($(window).width() > 700) 
       {      
             $(".notes").css({right:'-330px'}); 
             $(".notes-tab").css({right:'10px'}); 
@@ -105,7 +105,7 @@ $(document).ready(function () {
     });
 
     // Invoking controls on load    
-    if ($(window).width() > 800) {
+    if ($(window).width() > 700) {
 
           OverlayControlright(); 
 
