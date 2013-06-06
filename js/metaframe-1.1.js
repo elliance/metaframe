@@ -88,6 +88,7 @@ $(document).ready(function () {
     $(window).on('resize', function () {
         
         $('.notes-tab').removeClass('open');
+        $('.notes-anchor').unbind('click');
         $('.notes-tab').unbind('click');
       if ($(window).width() > 700) 
       {      
