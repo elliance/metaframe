@@ -137,6 +137,24 @@ right: -330px;
 	text-decoration: none;
 }
 
+.mf-comments {
+    overflow-y: auto;
+    div {
+        span:nth-child(1) {
+	    @include sub-title-style;
+            padding-top: .2em;
+            font-size: 1.2em;
+        }
+        span:nth-child(2) {
+            font-size: .8em;
+            color: #999696;
+        }
+        span:nth-child(3) {
+            display: block;
+            padding-bottom: 1em;
+        }
+    }
+}
 
 // Media querie to push notes to bottom of page below 700px
 

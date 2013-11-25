@@ -47,13 +47,13 @@ module.exports = function (grunt) {
                 }
             },
             html: {
-                files: ['html'],
+                files: ['*.html'],
                 options: {
                     livereload: true,
                 }
             },
             js: {
-                files: ['js'],
+                files: ['js/*.js'],
                 tasks: ['buildjs'],
                 options: {
                     livereload: true,

@@ -20,7 +20,6 @@ $(document).ready(function () {
     
     // Generate Notes Panel static Content
     var structure = [
-        
         '<form><input type="checkbox" id="noteBox" checked="checked" >show note markers</form>',
         '<h2>Page Notes</h2>'
     ];
@@ -45,6 +44,8 @@ $(document).ready(function () {
         noteNum++;
         $(this).prepend('<span class="notes-anchor"><figure>' + (noteNum) +'</figure></span>');
     });
+
+    metaframe_embed_comments();
 
     // Function defined for right panelD
     // Start in closed position
@@ -152,4 +153,81 @@ $(document).ready(function () {
             return prevent();
         }
     });
+
 });
+
+function metaframe_embed_comments() {
+    var structure = [
+        '<h2>Viewer Comments</h2>',
+        '<form method="post" class="mf-comment-form">',
+        '<input type="text" />',
+        '<textarea></textarea>',
+        '<input type="submit" value="Comment" />',
+        '</form>',
+        '<div class="mf-comments"></div>'
+    ];
+    $('.notes').append(structure.join('\n'));
+    var comments_reloader = metaframe_retrieve_comments();
+    $('.mf-comment-form').on('submit', function(e) {
+        comments_reloader();
+        e.preventDefault();
+    });
+
+    comments_reloader();
+    // reload every 10 minutes
+    setInterval(comments_reloader, 10*60*1000);
+}
+
+/**
+Returns a function that can be used to retrieve and update the comments
+on the page. The comments are stored in a closure, so the best way to update is to call
+this function once, store the result, and use that to do any updates.
+**/
+function metaframe_retrieve_comments() {
+    var comments = [];
+    function redraw_comments() {
+        var comment_elements = create_comment_elements();
+        // replacing with the new elements to keep the 
+        // appearance of the redraw flash from not happening on the auto
+        // refreshes.
+        $('.mf-comments').html($(comment_elements).html());
+    }
+    function create_comment_elements(index) {
+        index = index || 0;
+        var element = document.createElement('div');
+        var remove_quotes_pattern = /^"|"?/g;
+        // the last div is empty so that all of the elements can be appended to
+        // it.
+        if (comments[index] === undefined) {
+            return element;
+        }
+        var row = comments[index].split('","');
+        if (row.length <= 1) {
+            return element;
+        }
+        var element_contents = [];
+        for (var i=0; i<row.length; i++) {
+            element_contents.push('<span>');
+            element_contents.push(row[i].replace(remove_quotes_pattern, ''));
+            element_contents.push('</span>');
+        }
+        element.innerHTML = element_contents.join('\n');
+        var parent_element = create_comment_elements(index+1);
+        parent_element.appendChild(element);
+        return parent_element;
+    }
+    return function update_comments() {
+        console.log("(re)loading comments");
+        $.ajax({
+            'url': '/example.csv',
+            'contentType': 'text/csv'
+        }).done(function(data) {
+            var csv_rows = data.split("\n");
+            if (csv_rows !== comments) {
+                comments = csv_rows;
+                redraw_comments();
+            }
+        });
+    };
+
+}
