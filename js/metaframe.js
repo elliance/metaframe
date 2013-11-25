@@ -206,6 +206,7 @@ function metaframe_embed_comments() {
     });
     $('.mf-comment-form').on('submit', metaframe_submit({
         comments_reloader: comments_reloader,
+        csv_filename: csv_filename,
         form_action: form_action
     }));
     // initial load of the comments.
@@ -237,6 +238,7 @@ function metaframe_submit(props) {
         }
         $('#metaframe-comment').val('');
         data.timestamp = Date.now();
+        data.csv_filename = my.csv_filename;
         $.ajax({
             url: my.form_action,
             type: 'POST',
@@ -264,11 +266,21 @@ function metaframe_retrieve_comments(props) {
         // refreshes.
         $('.mf-comments').html($(comment_elements).html());
     }
+    function format_item(data, index) {
+        var remove_quotes_pattern = /^"|"?/g;
+        var new_data = data[index].replace(remove_quotes_pattern, '');
+        if (index === 1) {
+            console.log(new_data);
+            new_data = new Date(new_data);
+            console.log(new_data);
+            new_data = new_data.toString('dddd, MMMM ,yyyy h:mm:ss a');
+        }
+        return new_data;
+    }
     // creates the elements that will be drawn to the screen.
     function create_comment_elements(index) {
         index = index || 0;
         var element = document.createElement('div');
-        var remove_quotes_pattern = /^"|"?/g;
         // the last div is empty so that all of the elements can be appended to
         // it.
         if (comments[index] === undefined) {
@@ -281,7 +293,7 @@ function metaframe_retrieve_comments(props) {
         var element_contents = [];
         for (var i=0; i<row.length; i++) {
             element_contents.push('<span>');
-            element_contents.push(row[i].replace(remove_quotes_pattern, ''));
+            element_contents.push(format_item(row, i));
             element_contents.push('</span>');
         }
         element.innerHTML = element_contents.join('\n');
