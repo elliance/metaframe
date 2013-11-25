@@ -1,0 +1,22 @@
+{
+  "name": "metaframe",
+  "version": "1.0.0",
+  "description": "Metaframe is an easy-to-use notation layer for conveying the meta-knowledge in wireframes, mockups, and design comps. Made and shared with love by the folks at Elliance.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shortpgh/metaframe.git"
+  },
+  "author": "Elliance",
+  "bugs": {
+    "url": "https://github.com/shortpgh/metaframe/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-compass": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-htmlhint": "*",
+    "matchdep": "*",
+    "grunt-contrib-jshint": "~0.7.2"
+  }
+}
