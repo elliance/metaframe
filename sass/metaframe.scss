@@ -137,7 +137,7 @@ right: -330px;
 	text-decoration: none;
 }
 
-.mf-comment-form {
+#metaframe-form {
     padding-bottom: 1em;
     input[type=text], textarea {
         width: 100%;
@@ -154,6 +154,16 @@ right: -330px;
             border: 1px solid $blue-title;
         }
     }
+    &.error {
+        input[type=text], textarea {
+            border: 1px solid red;
+        }
+    }
+}
+#metaframe-form-error {
+    color: red;
+    height: 1em;
+    font-size: 1em;
 }
 
 .mf-comments {

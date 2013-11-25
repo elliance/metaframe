@@ -156,35 +156,107 @@ $(document).ready(function () {
 
 });
 
+/**
+Draws the metaframe comments functionality on the page. It expects two things.
+#To show the form and notes
+Include the data-metaframe-form on the body tag. It should point to the file that
+accepts the form input.
+
+##To change the notes file: 
+Put the full name in data-metaframe-comments attribute on the <body> tag. If this is
+left out, it will assume the value is comments.csv.
+
+#To show only the notes
+Include the data-metaframe-csv attribute on the <body> tag. Use comments.csv unless
+you have a better name. This is handy if you have multiple pages that you are getting
+comments about.
+
+#Form Handlers
+Several form handles are provided with this code. They are:
+* metaframe-form-submit.aspx
+* metaframe-form-submit.php
+**/
 function metaframe_embed_comments() {
+    var csv_filename = $('meta[name="metaframe-csv"]').attr('content');
+    var form_action = $('meta[name="metaframe-form"]').attr('content');
+    if (form_action === undefined && csv_filename === undefined) {
+        return;
+        // we aren't doing anything because you're telling us not to!
+    }
+    // set the default csv filename if no filename is provided.
+    if (csv_filename === undefined) {
+        csv_filename = 'comments.csv';
+    }
+    console.log(csv_filename);
+    console.log(form_action);
     var structure = [
         '<h2>Viewer Comments</h2>',
-        '<form method="post" class="mf-comment-form">',
-        '<input type="text" placeholder="Your name goes here." />',
-        '<textarea placeholder="Your comment goes here."></textarea>',
+        '<form method="post" id="metaframe-form" class="mf-comment-form">',
+        '<div id="metaframe-form-error"></div>',
+        '<input id="metaframe-user" type="text" placeholder="Your name goes here." />',
+        '<textarea id="metaframe-comment" placeholder="Your comment goes here."></textarea>',
         '<input type="submit" value="Comment" />',
         '</form>',
         '<div class="mf-comments"></div>'
     ];
     $('.notes').append(structure.join('\n'));
-    var comments_reloader = metaframe_retrieve_comments();
-    $('.mf-comment-form').on('submit', function(e) {
-        comments_reloader();
-        e.preventDefault();
+    var comments_reloader = metaframe_retrieve_comments({
+        csv_filename: csv_filename, 
+        form_action: form_action
     });
-
+    $('.mf-comment-form').on('submit', metaframe_submit({
+        comments_reloader: comments_reloader,
+        form_action: form_action
+    }));
+    // initial load of the comments.
     comments_reloader();
-    // reload every 10 minutes
+    // then reload every 10 minutes.
     setInterval(comments_reloader, 10*60*1000);
 }
+
+function metaframe_submit(props) {
+    var my = props;
+    return function(e) {
+        e.preventDefault();
+        var data = {}, error = false,
+            form = $('#metaframe-form'),
+            form_user = $('#metaframe-user'),
+            form_comment = $('#metaframe-comment');
+        data.user = form_user.val();
+        data.comment = form_comment.val();
+        if (data.user === '' || data.comment === '') {
+            error = "Please fill in all fields.";
+            form.addClass('error');
+        }
+        else {
+            form.removeClass('error');
+        }
+        if (error) {
+            $('#metaframe-form-error').html(error);
+            return;
+        }
+        $('#metaframe-comment').val('');
+        data.timestamp = Date.now();
+        $.ajax({
+            url: my.form_action,
+            type: 'POST',
+            data: data
+        })
+        .done(function() {
+            my.comments_reloader();
+        });
+    };
+};
 
 /**
 Returns a function that can be used to retrieve and update the comments
 on the page. The comments are stored in a closure, so the best way to update is to call
 this function once, store the result, and use that to do any updates.
 **/
-function metaframe_retrieve_comments() {
-    var comments = [];
+function metaframe_retrieve_comments(props) {
+    var comments = [],
+        my = props;
+    // handles the drawing of the comments after they are loaded.
     function redraw_comments() {
         var comment_elements = create_comment_elements();
         // replacing with the new elements to keep the 
@@ -192,6 +264,7 @@ function metaframe_retrieve_comments() {
         // refreshes.
         $('.mf-comments').html($(comment_elements).html());
     }
+    // creates the elements that will be drawn to the screen.
     function create_comment_elements(index) {
         index = index || 0;
         var element = document.createElement('div');
@@ -219,7 +292,7 @@ function metaframe_retrieve_comments() {
     return function update_comments() {
         console.log("(re)loading comments");
         $.ajax({
-            'url': '/example.csv',
+            'url': my.csv_filename,
             'contentType': 'text/csv'
         }).done(function(data) {
             var csv_rows = data.split("\n");
