@@ -24,6 +24,16 @@ module.exports = function (grunt) {
             }
         },
 
+        connect: {
+            server: {
+                options: {
+                    port: 9001,
+                    base: '.'
+                }
+            }
+        },
+        
+
         jshint: {
             all: ['js/metaframe.js']
         },
@@ -55,4 +65,5 @@ module.exports = function (grunt) {
     grunt.registerTask('buildcss', ['compass']);
     grunt.registerTask('buildjs', ['uglify', 'jshint']);
     grunt.registerTask('default', ['buildcss', 'buildjs']);
+    grunt.registerTask('dev', ['connect', 'watch']);
 };

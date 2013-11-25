@@ -17,6 +17,8 @@
     "grunt-contrib-watch": "*",
     "grunt-htmlhint": "*",
     "matchdep": "*",
-    "grunt-contrib-jshint": "~0.7.2"
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-connect": "~0.5.0",
+    "grunt-nodestatic": "~0.1.2"
   }
 }
