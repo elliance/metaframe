@@ -1,6 +1,6 @@
 {
   "name": "metaframe",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Metaframe is an easy-to-use notation layer for conveying the meta-knowledge in wireframes, mockups, and design comps. Made and shared with love by the folks at Elliance.",
   "repository": {
     "type": "git",

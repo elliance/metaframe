@@ -19,7 +19,7 @@ module.exports = function (grunt) {
         uglify: {
             build: {
                 files: {
-                    'js/metaframe.js': ['dist/metaframe-1.1.min.js']
+                    'dist/<%= pkg.name %>-<%= pkg.version %>.min.js': ['js/metaframe.js']
                 }
             }
         },
@@ -53,6 +53,6 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('buildcss', ['compass']);
-    grunt.registerTask('buildjs', ['uglify']);
+    grunt.registerTask('buildjs', ['uglify', 'jshint']);
     grunt.registerTask('default', ['buildcss', 'buildjs']);
 };
