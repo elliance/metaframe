@@ -137,6 +137,25 @@ right: -330px;
 	text-decoration: none;
 }
 
+.mf-comment-form {
+    padding-bottom: 1em;
+    input[type=text], textarea {
+        width: 100%;
+    }
+    input[type=submit] {
+        color: #000000;
+        background-color: $blue-title;
+        padding: 1em;
+        border: none;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        &:active {
+            border: 1px solid $blue-title;
+        }
+    }
+}
+
 .mf-comments {
     overflow-y: auto;
     div {

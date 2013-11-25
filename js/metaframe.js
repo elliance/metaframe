@@ -160,8 +160,8 @@ function metaframe_embed_comments() {
     var structure = [
         '<h2>Viewer Comments</h2>',
         '<form method="post" class="mf-comment-form">',
-        '<input type="text" />',
-        '<textarea></textarea>',
+        '<input type="text" placeholder="Your name goes here." />',
+        '<textarea placeholder="Your comment goes here."></textarea>',
         '<input type="submit" value="Comment" />',
         '</form>',
         '<div class="mf-comments"></div>'

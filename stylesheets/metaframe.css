@@ -206,10 +206,32 @@ body .notes-tab {
   text-decoration: none;
 }
 /* line 140, ../sass/metaframe.scss */
+body .mf-comment-form {
+  padding-bottom: 1em;
+}
+/* line 142, ../sass/metaframe.scss */
+body .mf-comment-form input[type=text], body .mf-comment-form textarea {
+  width: 100%;
+}
+/* line 145, ../sass/metaframe.scss */
+body .mf-comment-form input[type=submit] {
+  color: #000000;
+  background-color: #2998c7;
+  padding: 1em;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+/* line 153, ../sass/metaframe.scss */
+body .mf-comment-form input[type=submit]:active {
+  border: 1px solid #2998c7;
+}
+/* line 159, ../sass/metaframe.scss */
 body .mf-comments {
   overflow-y: auto;
 }
-/* line 143, ../sass/metaframe.scss */
+/* line 162, ../sass/metaframe.scss */
 body .mf-comments div span:nth-child(1) {
   font-size: 1.5em;
   font-weight: 600;
@@ -219,22 +241,22 @@ body .mf-comments div span:nth-child(1) {
   padding-top: .2em;
   font-size: 1.2em;
 }
-/* line 148, ../sass/metaframe.scss */
+/* line 167, ../sass/metaframe.scss */
 body .mf-comments div span:nth-child(2) {
   font-size: .8em;
   color: #999696;
 }
-/* line 152, ../sass/metaframe.scss */
+/* line 171, ../sass/metaframe.scss */
 body .mf-comments div span:nth-child(3) {
   display: block;
   padding-bottom: 1em;
 }
 @media screen and (max-width: 700px) {
-  /* line 165, ../sass/metaframe.scss */
+  /* line 184, ../sass/metaframe.scss */
   body .bottom {
     right: auto !important;
   }
-  /* line 168, ../sass/metaframe.scss */
+  /* line 187, ../sass/metaframe.scss */
   body .notes {
     width: 100%;
     height: 300px;
@@ -245,7 +267,7 @@ body .mf-comments div span:nth-child(3) {
     border-top: 10px solid #00b7ea;
     border-left: none;
   }
-  /* line 182, ../sass/metaframe.scss */
+  /* line 201, ../sass/metaframe.scss */
   body .notes-tab {
     width: 100px;
     height: 5px;
@@ -266,23 +288,23 @@ body .mf-comments div span:nth-child(3) {
     right: auto;
   }
 }
-/* line 201, ../sass/metaframe.scss */
+/* line 220, ../sass/metaframe.scss */
 body ::-webkit-scrollbar {
   width: 12px;
 }
-/* line 207, ../sass/metaframe.scss */
+/* line 226, ../sass/metaframe.scss */
 body ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px #333;
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 215, ../sass/metaframe.scss */
+/* line 234, ../sass/metaframe.scss */
 body ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
   background: #666;
 }
-/* line 221, ../sass/metaframe.scss */
+/* line 240, ../sass/metaframe.scss */
 body ::-webkit-scrollbar-thumb:window-inactive {
   background: #CCC;
 }
