@@ -18,10 +18,13 @@ public partial class _Default : System.Web.UI.Page
             }
             String rootPath = Server.MapPath("~");
             String path = rootPath + "\\" + Request.Form["csv_filename"];
+            DateTime time = DateTime.Now;              // Use current time
+            string format = "MMM d HH:mm yyyy";        // Use this format
             String line = "";
-            line += "\"" + Request.Form["user"] + "\"";
-            line += ",\"" + Request.Form["timestamp"] + "\"";
-            line += ",\"" + Request.Form["comment"] + "\"";
+            line += "\"" + Request.Form["comment"] + "\"";
+            line += ",\"" + Request.Form["user"] + "\"";
+            line += ",\"" + time.ToString(format) + "\"";
+            line += ",\"" + Request.Form["page"] + "\"";
             if (!File.Exists(path))
             {
                 // Create a file to write to. 

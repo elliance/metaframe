@@ -170,17 +170,17 @@ right: -330px;
     overflow-y: auto;
     div {
         span:nth-child(1) {
-	    @include sub-title-style;
             padding-top: .2em;
             font-size: 1.2em;
+			display: block;
         }
         span:nth-child(2) {
-            font-size: .8em;
+            font-size: 1em;
             color: #999696;
         }
         span:nth-child(3) {
-            display: block;
-            padding-bottom: 1em;
+            padding-bottom: .8em;
+			color: #999696;
         }
     }
 }

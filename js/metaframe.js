@@ -187,19 +187,22 @@ function metaframe_embed_comments() {
     if (csv_filename === undefined) {
         csv_filename = 'comments.csv';
     }
-    console.log(csv_filename);
-    console.log(form_action);
-    var structure = [
-        '<h2>Viewer Comments</h2>',
-        '<form method="post" id="metaframe-form" class="mf-comment-form">',
-        '<div id="metaframe-form-error"></div>',
-        '<input id="metaframe-user" type="text" placeholder="Your name goes here." />',
-        '<textarea id="metaframe-comment" placeholder="Your comment goes here."></textarea>',
-        '<input type="submit" value="Comment" />',
-        '</form>',
+    var structure = 
+        '<h2>Viewer Comments</h2>'
+    ;
+    if (form_action) {
+        structure +=
+        '<form method="post" id="metaframe-form" class="mf-comment-form">' +
+        '<div id="metaframe-form-error"></div>' +
+        '<input id="metaframe-user" type="text" placeholder="Your name goes here." />' +
+        '<textarea id="metaframe-comment" placeholder="Your comment goes here."></textarea>' +
+        '<input type="submit" value="Comment" />' +
+        '</form>';
+    }
+    structure += 
         '<div class="mf-comments"></div>'
-    ];
-    $('.notes').append(structure.join('\n'));
+    ;
+    $('.notes').append(structure);
     var comments_reloader = metaframe_retrieve_comments({
         csv_filename: csv_filename, 
         form_action: form_action
@@ -217,7 +220,7 @@ function metaframe_embed_comments() {
 
 function metaframe_submit(props) {
     var my = props;
-    return function(e) {
+    return function (e) {
         e.preventDefault();
         var data = {}, error = false,
             form = $('#metaframe-form'),
@@ -237,14 +240,15 @@ function metaframe_submit(props) {
             return;
         }
         $('#metaframe-comment').val('');
-        data.timestamp = Date.now();
+        data.timestamp = Date().toString('dddd, MMMM,yyyy h:mm:ss a z');
+        data.page = window.location.pathname;
         data.csv_filename = my.csv_filename;
         $.ajax({
             url: my.form_action,
             type: 'POST',
             data: data
         })
-        .done(function() {
+        .done(function () {
             my.comments_reloader();
         });
     };
@@ -270,10 +274,8 @@ function metaframe_retrieve_comments(props) {
         var remove_quotes_pattern = /^"|"?/g;
         var new_data = data[index].replace(remove_quotes_pattern, '');
         if (index === 1) {
-            console.log(new_data);
-            new_data = new Date(new_data);
-            console.log(new_data);
-            new_data = new_data.toString('dddd, MMMM ,yyyy h:mm:ss a');
+            //new_data = new Date(new_data);
+            //new_data = new_data.toString('dddd, MMMM,yyyy h:mm:ss a Z');
         }
         return new_data;
     }
@@ -290,11 +292,22 @@ function metaframe_retrieve_comments(props) {
         if (row.length <= 1) {
             return element;
         }
+        // if the locations don't match, move to the next element
+        console.log(format_item(row, 3));
+        console.log(window.location.pathname);
+        /*
+        if (format_item(row, 3) != window.location.pathname) {
+            console.log("HERE");
+            return create_comment_elements(index + 1);
+        }
+        */
         var element_contents = [];
-        for (var i=0; i<row.length; i++) {
-            element_contents.push('<span>');
-            element_contents.push(format_item(row, i));
-            element_contents.push('</span>');
+        for (var i = 0; i < row.length; i++) {
+            if (i != 3) { // 3 is the page location this was submitted on
+                element_contents.push('<span>');
+                element_contents.push(format_item(row, i));
+                element_contents.push('</span>');
+            }
         }
         element.innerHTML = element_contents.join('\n');
         var parent_element = create_comment_elements(index+1);
@@ -302,11 +315,10 @@ function metaframe_retrieve_comments(props) {
         return parent_element;
     }
     return function update_comments() {
-        console.log("(re)loading comments");
         $.ajax({
             'url': my.csv_filename,
             'contentType': 'text/csv'
-        }).done(function(data) {
+        }).done(function (data) {
             var csv_rows = data.split("\n");
             if (csv_rows !== comments) {
                 comments = csv_rows;

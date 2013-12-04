@@ -243,23 +243,19 @@ body .mf-comments {
 }
 /* line 172, ../sass/metaframe.scss */
 body .mf-comments div span:nth-child(1) {
-  font-size: 1.5em;
-  font-weight: 600;
-  font-family: Arial, Helvetica, san-serif;
-  padding: 20px 0 20px 0;
-  color: #2998c7;
   padding-top: .2em;
   font-size: 1.2em;
+  display: block;
 }
 /* line 177, ../sass/metaframe.scss */
 body .mf-comments div span:nth-child(2) {
-  font-size: .8em;
+  font-size: 1em;
   color: #999696;
 }
 /* line 181, ../sass/metaframe.scss */
 body .mf-comments div span:nth-child(3) {
-  display: block;
-  padding-bottom: 1em;
+  padding-bottom: .8em;
+  color: #999696;
 }
 @media screen and (max-width: 700px) {
   /* line 194, ../sass/metaframe.scss */
