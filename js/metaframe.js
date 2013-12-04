@@ -226,8 +226,8 @@ function metaframe_submit(props) {
             form = $('#metaframe-form'),
             form_user = $('#metaframe-user'),
             form_comment = $('#metaframe-comment');
-        data.user = form_user.val();
-        data.comment = form_comment.val();
+        data.user = encodeURIComponent(form_user.val());
+        data.comment = encodeURIComponent(form_comment.val());
         if (data.user === '' || data.comment === '') {
             error = "Please fill in all fields.";
             form.addClass('error');
@@ -277,6 +277,11 @@ function metaframe_retrieve_comments(props) {
             //new_data = new Date(new_data);
             //new_data = new_data.toString('dddd, MMMM,yyyy h:mm:ss a Z');
         }
+        new_data = decodeURIComponent(new_data);
+        if (index === 0) {
+            var line_break_pattern = /\n/g;
+            new_data = new_data.replace(line_break_pattern, '<br/>');
+        }
         return new_data;
     }
     // creates the elements that will be drawn to the screen.
@@ -293,8 +298,6 @@ function metaframe_retrieve_comments(props) {
             return element;
         }
         // if the locations don't match, move to the next element
-        console.log(format_item(row, 3));
-        console.log(window.location.pathname);
         /*
         if (format_item(row, 3) != window.location.pathname) {
             console.log("HERE");
