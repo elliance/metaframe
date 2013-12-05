@@ -382,6 +382,7 @@ function metaframe_comments_handler(props) {
     // changes the class on the new elements to show them one at a time
     function show_comments_elements(comments_elements, index) {
         index = index || 0;
+        console.log("showing comment " + index);
         if (index >= comments_elements.length) {
             return;
         }
@@ -396,6 +397,7 @@ function metaframe_comments_handler(props) {
     // driver for drawing the new comments. see above functions for most of the internal
     // work that is happening.
     function draw_comments_csv(csv) {
+        console.log("drawing");
         // parse the csv first
         var csv_rows = csv.split("\n");
         var comments_to_draw = parse_csv_rows(csv_rows);

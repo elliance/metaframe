@@ -6,7 +6,23 @@
 
 @-webkit-keyframes growHeight {
   to { 
-    max-height: initial;
+    max-height: 100%;
+    opacity: 1;
+	padding-bottom: 1em;
+  }
+}
+
+@-moz-keyframes growHeight {
+  to { 
+    max-height: 100%;
+    opacity: 1;
+	padding-bottom: 1em;
+  }
+}
+
+@keyframes growHeight {
+  to { 
+    max-height: 100%;
     opacity: 1;
 	padding-bottom: 1em;
   }
@@ -161,6 +177,7 @@ h2.mf-comments-header {
 		border: 2px solid #ccc;
 		box-shadow: inset 0 1px 3px #ddd;
 		padding: .5em .6em;
+		margin-bottom: .2em;
 
 		&:focus {
 			border-color: $blue-title;
@@ -200,10 +217,12 @@ h2.mf-comments-header {
 
     div {
 		/*padding-top: 1em;*/
-		/*padding-bottom: 1em;*/
+		/*padding-bottom: 1em;*/ 
 		max-height: 0;
 		opacity: 0;
 		-webkit-animation: growHeight 0.5s ease forwards;
+		-moz-animation: growHeight 0.5s ease forwards;
+		animation: growHeight 0.5s ease forwards;
 
         span:nth-child(1) {
             font-size: 1em;
