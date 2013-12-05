@@ -370,9 +370,9 @@ function metaframe_comments_handler(props) {
         new_element = $(new_element);
         new_element.addClass('metaframe_new_comment');
         new_element.html(
-            '<span>' + comments_to_draw[index][my.column_key['comment']] + '</span>' +
-            '<span>' + comments_to_draw[index][my.column_key['user']] + '</span>' +
-            '<span>' + comments_to_draw[index][my.column_key['timestamp']] + '</span>'
+            '<span class="mf-comment">' + comments_to_draw[index][my.column_key['comment']] + '</span>' +
+            '<span class="mf-comment-user">' + comments_to_draw[index][my.column_key['user']] + '</span>' +
+            '<span class="mf-comment-timestamp">' + comments_to_draw[index][my.column_key['timestamp']] + '</span>'
         );
         new_elements.push(new_element);
         return new_elements.concat(

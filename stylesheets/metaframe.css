@@ -301,17 +301,17 @@ body .mf-comments div {
   animation: growHeight 0.5s ease forwards;
 }
 /* line 227, ../sass/metaframe.scss */
-body .mf-comments div span:nth-child(1) {
+body .mf-comments div span.mf-comment {
   font-size: 1em;
   display: block;
 }
 /* line 231, ../sass/metaframe.scss */
-body .mf-comments div span:nth-child(2) {
+body .mf-comments div span.mf-comment-user {
   font-size: .8em;
   color: #999696;
 }
 /* line 235, ../sass/metaframe.scss */
-body .mf-comments div span:nth-child(3) {
+body .mf-comments div span.mf-comment-timestamp {
   font-size: .8em;
   padding-left: 1em;
   color: #999696;
@@ -372,4 +372,10 @@ body ::-webkit-scrollbar-thumb {
 /* line 306, ../sass/metaframe.scss */
 body ::-webkit-scrollbar-thumb:window-inactive {
   background: #CCC;
+}
+
+/* line 314, ../sass/metaframe.scss */
+.lt-ie9 .mf-comments div {
+  max-height: 100%;
+  padding-bottom: 1em;
 }

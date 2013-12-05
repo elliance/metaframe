@@ -224,15 +224,15 @@ h2.mf-comments-header {
 		-moz-animation: growHeight 0.5s ease forwards;
 		animation: growHeight 0.5s ease forwards;
 
-        span:nth-child(1) {
+        span.mf-comment {
             font-size: 1em;
 			display: block;
         }
-        span:nth-child(2) {
+        span.mf-comment-user {
             font-size: .8em;
             color: #999696;
         }
-        span:nth-child(3) {
+        span.mf-comment-timestamp {
             font-size: .8em;
 			padding-left: 1em;
 			color: #999696;
@@ -308,4 +308,13 @@ h2.mf-comments-header {
 	}
 }
 
+.lt-ie9 {
+	.mf-comments {
+
+		div {
+			max-height: 100%;
+			padding-bottom: 1em;
+		}
+	}
+}
 
