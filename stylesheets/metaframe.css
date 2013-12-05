@@ -63,15 +63,25 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 9, ../sass/metaframe.scss */
+@-webkit-keyframes growHeight {
+  /* line 8, ../sass/metaframe.scss */
+  to {
+    max-height: initial;
+    opacity: 1;
+    padding-bottom: 1em;
+  }
+}
+
+/* line 18, ../sass/metaframe.scss */
 body {
   font-family: Arial, Helvetica, san-serif;
+  line-height: 120%;
 }
-/* line 14, ../sass/metaframe.scss */
+/* line 24, ../sass/metaframe.scss */
 body .hide {
   display: none;
 }
-/* line 19, ../sass/metaframe.scss */
+/* line 29, ../sass/metaframe.scss */
 body .notes-anchor {
   width: 45px;
   height: 36px;
@@ -98,12 +108,12 @@ body .notes-anchor {
   text-align: center;
   padding: 10px 0 0 0 !important;
 }
-/* line 37, ../sass/metaframe.scss */
+/* line 47, ../sass/metaframe.scss */
 body .notes-anchor figure {
   font-size: 26px;
   line-height: 100%;
 }
-/* line 51, ../sass/metaframe.scss */
+/* line 61, ../sass/metaframe.scss */
 body .notes {
   width: 300px;
   position: fixed;
@@ -118,14 +128,14 @@ body .notes {
   overflow: auto;
   right: -330px;
 }
-/* line 66, ../sass/metaframe.scss */
+/* line 76, ../sass/metaframe.scss */
 body .notes h1 {
   font-size: 2em;
   font-weight: 600;
   font-family: Arial, Helvetica, san-serif;
   color: #CCC;
 }
-/* line 69, ../sass/metaframe.scss */
+/* line 79, ../sass/metaframe.scss */
 body .notes h2 {
   font-size: 1.5em;
   font-weight: 600;
@@ -133,12 +143,12 @@ body .notes h2 {
   padding: 20px 0 20px 0;
   color: #2998c7;
 }
-/* line 74, ../sass/metaframe.scss */
+/* line 84, ../sass/metaframe.scss */
 body .notes .note-holder {
   padding-bottom: 25px;
   width: 95%;
 }
-/* line 80, ../sass/metaframe.scss */
+/* line 90, ../sass/metaframe.scss */
 body .notes .note-count {
   width: 20px;
   height: 24px;
@@ -165,15 +175,15 @@ body .notes .note-count {
   top: -5px;
   position: relative;
 }
-/* line 99, ../sass/metaframe.scss */
+/* line 109, ../sass/metaframe.scss */
 body .notes span {
   color: #fff;
 }
-/* line 104, ../sass/metaframe.scss */
+/* line 114, ../sass/metaframe.scss */
 body .notes #noteBox {
   margin-top: 20px;
 }
-/* line 109, ../sass/metaframe.scss */
+/* line 119, ../sass/metaframe.scss */
 body .notes .note-body {
   display: block;
   font-family: Arial, Helvetica, san-serif;
@@ -181,7 +191,7 @@ body .notes .note-body {
   line-height: 1.4em;
   padding-left: 45px;
 }
-/* line 121, ../sass/metaframe.scss */
+/* line 131, ../sass/metaframe.scss */
 body .notes-tab {
   position: fixed;
   z-index: 99;
@@ -205,68 +215,92 @@ body .notes-tab {
   color: #fff;
   text-decoration: none;
 }
-/* line 140, ../sass/metaframe.scss */
+/* line 150, ../sass/metaframe.scss */
+body h2.mf-comments-header {
+  padding-bottom: 0px;
+}
+/* line 154, ../sass/metaframe.scss */
 body #metaframe-form {
+  font-size: .9em;
   padding-bottom: 1em;
 }
-/* line 142, ../sass/metaframe.scss */
+/* line 157, ../sass/metaframe.scss */
 body #metaframe-form input[type=text], body #metaframe-form textarea {
-  width: 100%;
+  font-size: 1.2em;
+  font-family: Arial, Helvetica, san-serif;
+  width: 95%;
+  border: 2px solid #ccc;
+  box-shadow: inset 0 1px 3px #ddd;
+  padding: .5em .6em;
 }
-/* line 145, ../sass/metaframe.scss */
+/* line 165, ../sass/metaframe.scss */
+body #metaframe-form input[type=text]:focus, body #metaframe-form textarea:focus {
+  border-color: #2998c7;
+}
+/* line 169, ../sass/metaframe.scss */
+body #metaframe-form textarea {
+  height: 10em;
+}
+/* line 172, ../sass/metaframe.scss */
 body #metaframe-form input[type=submit] {
   color: #fff;
   font-weight: bold;
   background-color: #2998c7;
   padding: 1em;
-  border: none;
-  margin-left: auto;
-  margin-right: auto;
   display: block;
-}
-/* line 154, ../sass/metaframe.scss */
-body #metaframe-form input[type=submit]:active {
   border: 1px solid #2998c7;
+  border-radius: 5px;
 }
-/* line 159, ../sass/metaframe.scss */
+/* line 180, ../sass/metaframe.scss */
+body #metaframe-form input[type=submit]:active {
+  border: 1px solid #fff;
+}
+/* line 185, ../sass/metaframe.scss */
 body #metaframe-form.error input[type=text], body #metaframe-form.error textarea {
-  border: 1px solid #d13636;
+  border-color: #d13636;
 }
-/* line 164, ../sass/metaframe.scss */
+/* line 190, ../sass/metaframe.scss */
 body #metaframe-form-error {
   color: #d13636;
   height: 1em;
   font-size: 1em;
 }
-/* line 170, ../sass/metaframe.scss */
+/* line 196, ../sass/metaframe.scss */
 body .mf-comments {
-  overflow-y: auto;
+  -webkit-transition: all 2s ease;
+  transition: all 2s ease;
+  position: relative;
 }
-/* line 172, ../sass/metaframe.scss */
+/* line 201, ../sass/metaframe.scss */
 body .mf-comments div {
-  padding-top: 1em;
+  /*padding-top: 1em;*/
+  /*padding-bottom: 1em;*/
+  max-height: 0;
+  opacity: 0;
+  -webkit-animation: growHeight 0.5s ease forwards;
 }
-/* line 175, ../sass/metaframe.scss */
+/* line 208, ../sass/metaframe.scss */
 body .mf-comments div span:nth-child(1) {
-  font-size: 1.2em;
+  font-size: 1em;
   display: block;
 }
-/* line 179, ../sass/metaframe.scss */
+/* line 212, ../sass/metaframe.scss */
 body .mf-comments div span:nth-child(2) {
-  font-size: 1em;
+  font-size: .8em;
   color: #999696;
 }
-/* line 183, ../sass/metaframe.scss */
+/* line 216, ../sass/metaframe.scss */
 body .mf-comments div span:nth-child(3) {
-  padding-bottom: .8em;
+  font-size: .8em;
+  padding-left: 1em;
   color: #999696;
 }
 @media screen and (max-width: 700px) {
-  /* line 196, ../sass/metaframe.scss */
+  /* line 231, ../sass/metaframe.scss */
   body .bottom {
     right: auto !important;
   }
-  /* line 199, ../sass/metaframe.scss */
+  /* line 234, ../sass/metaframe.scss */
   body .notes {
     width: 100%;
     height: 300px;
@@ -277,7 +311,7 @@ body .mf-comments div span:nth-child(3) {
     border-top: 10px solid #00b7ea;
     border-left: none;
   }
-  /* line 213, ../sass/metaframe.scss */
+  /* line 248, ../sass/metaframe.scss */
   body .notes-tab {
     width: 100px;
     height: 5px;
@@ -298,23 +332,23 @@ body .mf-comments div span:nth-child(3) {
     right: auto;
   }
 }
-/* line 232, ../sass/metaframe.scss */
+/* line 267, ../sass/metaframe.scss */
 body ::-webkit-scrollbar {
   width: 12px;
 }
-/* line 238, ../sass/metaframe.scss */
+/* line 273, ../sass/metaframe.scss */
 body ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px #333;
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 246, ../sass/metaframe.scss */
+/* line 281, ../sass/metaframe.scss */
 body ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
   background: #666;
 }
-/* line 252, ../sass/metaframe.scss */
+/* line 287, ../sass/metaframe.scss */
 body ::-webkit-scrollbar-thumb:window-inactive {
   background: #CCC;
 }

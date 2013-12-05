@@ -179,43 +179,68 @@ Several form handles are provided with this code. They are:
 function metaframe_embed_comments() {
     var csv_filename = $('meta[name="metaframe-csv"]').attr('content');
     var form_action = $('meta[name="metaframe-form"]').attr('content');
+    var these_comments = [];
     if (form_action === undefined && csv_filename === undefined) {
         return;
-        // we aren't doing anything because you're telling us not to!
+        // we aren't doing showing comments because you're telling us not to!
     }
-    // set the default csv filename if no filename is provided.
+    // set the default csv filename if no filename is provided but a form is provided.
     if (csv_filename === undefined) {
         csv_filename = 'comments.csv';
     }
-    var structure = 
-        '<h2>Viewer Comments</h2>'
-    ;
-    if (form_action) {
-        structure +=
-        '<form method="post" id="metaframe-form" class="mf-comment-form">' +
-        '<div id="metaframe-form-error"></div>' +
-        '<input id="metaframe-user" type="text" placeholder="Your name goes here." />' +
-        '<textarea id="metaframe-comment" placeholder="Your comment goes here."></textarea>' +
-        '<input type="submit" value="Comment" />' +
-        '</form>';
+    $('.notes').append(get_structure_html());
+    if (sessionStorage.getItem("metaframe_user")) {
+        $('#metaframe-user').val(decodeURIComponent(sessionStorage.getItem("metaframe_user")));
     }
-    structure += 
-        '<div class="mf-comments"></div>'
-    ;
-    $('.notes').append(structure);
-    var comments_reloader = metaframe_retrieve_comments({
+    // setting up the comment display and submit handlers.
+    var comments_handler = metaframe_comments_handler({
         csv_filename: csv_filename, 
-        form_action: form_action
+        form_action: form_action,
+        external_comments: these_comments
     });
     $('.mf-comment-form').on('submit', metaframe_submit({
-        comments_reloader: comments_reloader,
+        comments_handler: comments_handler,
         csv_filename: csv_filename,
         form_action: form_action
     }));
-    // initial load of the comments.
-    comments_reloader();
-    // then reload every 10 minutes.
-    setInterval(comments_reloader, 10*60*1000);
+    // have to call the comment handler once to load the first found of comments. 
+    // after those are loaded, reloading them every 10 minutes. probably overkill, but
+    // a good number if multiple people are working in a small period of time.
+    comments_handler.load();
+    setInterval(comments_handler.load, 10 * 60 * 1000);
+
+    if (window.location.hash === '#downloadcomments') {
+        generate_and_download_csv();
+    }
+
+    function get_structure_html() {
+        var structure = '<h2 class="mf-comments-header">Comments</h2>';
+        if (form_action) {
+            structure +=
+                '<form method="post" id="metaframe-form" class="mf-comment-form">' +
+                '<div id="metaframe-form-error"></div>' +
+                '<input id="metaframe-user" type="text" placeholder="Your name goes here." />' +
+                '<textarea id="metaframe-comment" placeholder="Your comment goes here."></textarea>' +
+                '<input type="submit" value="Comment" />' +
+                '</form>';
+        }
+        structure += '<div class="mf-comments"></div>';
+        return structure;
+    }
+    function generate_and_download_csv() {
+        setTimeout(function () {
+            var comments = comments_handler.get();
+            for (var i = 0; i < comments.length; i++) {
+                console.log(i);
+                comments[i] = '"' + comments[i].join('","') + '"';
+                comments[i].replace(/\<br\/\>/g, '\n');
+            }
+            var comments_string = comments.join('\n');
+            // the below code doesn't work well. need to do more research into the 
+            // filesave html5 api.
+            window.location.href = "data:text/csv," + encodeURIComponent(comments_string);
+        }, 1000);
+    }
 }
 
 function metaframe_submit(props) {
@@ -239,17 +264,27 @@ function metaframe_submit(props) {
             $('#metaframe-form-error').html(error);
             return;
         }
+        else {
+            $('#metaframe-form-error').html("");
+        }
         $('#metaframe-comment').val('');
-        data.timestamp = Date().toString('dddd, MMMM,yyyy h:mm:ss a z');
+        var now = new Date();
+        now_minutes = now.getMinutes();
+        if (now_minutes < 10) {
+            now_minutes = "0" + now_minutes;
+        }
+        data.timestamp = now.getMonth() + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now_minutes + " GMT" + now.getTimezoneOffset() / 60 * -1;
         data.page = window.location.pathname;
         data.csv_filename = my.csv_filename;
+        my.comments_handler.add(data);
         $.ajax({
             url: my.form_action,
             type: 'POST',
             data: data
         })
         .done(function () {
-            my.comments_reloader();
+            //my.comments_handler.load();
+            sessionStorage.setItem("metaframe_user", data.user);
         });
     };
 };
@@ -259,75 +294,136 @@ Returns a function that can be used to retrieve and update the comments
 on the page. The comments are stored in a closure, so the best way to update is to call
 this function once, store the result, and use that to do any updates.
 **/
-function metaframe_retrieve_comments(props) {
+function metaframe_comments_handler(props) {
     var comments = [],
         my = props;
-    // handles the drawing of the comments after they are loaded.
-    function redraw_comments() {
-        var comment_elements = create_comment_elements();
-        // replacing with the new elements to keep the 
-        // appearance of the redraw flash from not happening on the auto
-        // refreshes.
-        $('.mf-comments').html($(comment_elements).html());
-    }
-    function format_item(data, index) {
+    my.column_key = { 'comment': 0, 'user': 1, 'timestamp': 2, 'page': 3, 'spacer': 4 };
+    // does the work on the specific column.
+    function format_col(cur_col, index) {
         var remove_quotes_pattern = /^"|"?/g;
-        var new_data = data[index].replace(remove_quotes_pattern, '');
-        if (index === 1) {
-            //new_data = new Date(new_data);
-            //new_data = new_data.toString('dddd, MMMM,yyyy h:mm:ss a Z');
+        var line_break_pattern = /\n/g;
+        var new_col = cur_col.replace(remove_quotes_pattern, '');
+        new_col = decodeURIComponent(new_col);
+        if (index === my.column_key['comment']) {
+            new_col = new_col.replace(line_break_pattern, '<br/>');
         }
-        new_data = decodeURIComponent(new_data);
-        if (index === 0) {
-            var line_break_pattern = /\n/g;
-            new_data = new_data.replace(line_break_pattern, '<br/>');
-        }
-        return new_data;
+        return new_col;
     }
-    // creates the elements that will be drawn to the screen.
-    function create_comment_elements(index) {
+    // runs formatting on each column in the row and returns a new row.
+    function format_row(cur_row, index) {
         index = index || 0;
-        var element = document.createElement('div');
-        // the last div is empty so that all of the elements can be appended to
-        // it.
-        if (comments[index] === undefined) {
-            return element;
+        var new_row = [];
+        if (index >= cur_row.length) {
+            return new_row;
         }
-        var row = comments[index].split('","');
-        if (row.length <= 1) {
-            return element;
-        }
-        // if the locations don't match, move to the next element
-        /*
-        if (format_item(row, 3) != window.location.pathname) {
-            console.log("HERE");
-            return create_comment_elements(index + 1);
-        }
-        */
-        var element_contents = [];
-        for (var i = 0; i < row.length; i++) {
-            if (i != 3) { // 3 is the page location this was submitted on
-                element_contents.push('<span>');
-                element_contents.push(format_item(row, i));
-                element_contents.push('</span>');
-            }
-        }
-        element.innerHTML = element_contents.join('\n');
-        var parent_element = create_comment_elements(index+1);
-        parent_element.appendChild(element);
-        return parent_element;
+        new_row.push(format_col(cur_row[index], index));
+        return new_row.concat(format_row(cur_row, (index + 1)));
     }
-    return function update_comments() {
-        $.ajax({
-            'url': my.csv_filename,
-            'contentType': 'text/csv'
-        }).done(function (data) {
-            var csv_rows = data.split("\n");
-            if (csv_rows !== comments) {
-                comments = csv_rows;
-                redraw_comments();
-            }
-        });
+    // looks through the comments array to see if this one exists already.
+    function is_in_comments(cur_row) {
+        var result = search_comments(cur_row);
+        if (result.length > 0) {
+            return true;
+        }
+        return false;
+    }
+    // search through each comment row to see if there is a match.
+    // converts the arrays to strings and matches that way. not a great match,
+    // but this is pretty simple data and should be effective enough.
+    function search_comments(row, index) {
+        index = index || 0;
+        var matches = [];
+        if (index >= comments.length) {
+            return matches;
+        }
+        if (row.join(',') == comments[index].join(',')) {
+            matches.push(row);
+        }
+        return matches.concat(search_comments(row, (index + 1)));
+    }
+    // does some work on each row to determine if it should be added to the page.
+    function parse_csv_rows(csv_rows, index) {
+        index = index || 0;
+        var rows_to_return = [];
+        if (index >= csv_rows.length) {
+            return rows_to_return;
+        }
+        var cur_row = csv_rows[index];
+        cur_row = cur_row.split('","');
+        if (cur_row.length <= 1) {
+            return rows_to_return;
+        }
+        cur_row = format_row(cur_row);
+        if (!is_in_comments(cur_row) && cur_row[my.column_key['page']] == window.location.pathname) {
+            rows_to_return.push(cur_row);
+        }
+        return rows_to_return.concat(parse_csv_rows(csv_rows, (index + 1)));
+    }
+    // builds the comment dom element.
+    function build_comments_elements(comments_to_draw, index) {
+        index = index || 0;
+        var new_elements = [];
+        if (index >= comments_to_draw.length) {
+            return new_elements;
+        }
+        var new_element = document.createElement('div');
+        new_element = $(new_element);
+        new_element.addClass('metaframe_new_comment');
+        new_element.html(
+            '<span>' + comments_to_draw[index][my.column_key['comment']] + '</span>' +
+            '<span>' + comments_to_draw[index][my.column_key['user']] + '</span>' +
+            '<span>' + comments_to_draw[index][my.column_key['timestamp']] + '</span>'
+        );
+        new_elements.push(new_element);
+        return new_elements.concat(
+            build_comments_elements(comments_to_draw, (index + 1))
+        );
+    }
+    // changes the class on the new elements to show them one at a time
+    function show_comments_elements(comments_elements, index) {
+        index = index || 0;
+        if (index >= comments_elements.length) {
+            return;
+        }
+        comments_elements[index].prependTo('.mf-comments');
+        return show_comments_elements(comments_elements, index + 1);
+    }
+    // draws each comment in the row. animate the group to show them coming in.
+    function draw_new_comments(comments_to_draw, index) {
+        var comments_elements = build_comments_elements(comments_to_draw);
+        show_comments_elements(comments_elements);
+    }
+    // driver for drawing the new comments. see above functions for most of the internal
+    // work that is happening.
+    function draw_comments_csv(csv) {
+        // parse the csv first
+        var csv_rows = csv.split("\n");
+        var comments_to_draw = parse_csv_rows(csv_rows);
+        draw_new_comments(comments_to_draw);
+        comments = comments.concat(comments_to_draw);
+    }
+    // gets the comment csv, then sends it through the parse function to 
+    // load the comments and write the new ones to the screen.
+    return {
+        load: function update_comments() {
+            $.ajax({
+                'url': my.csv_filename,
+                'contentType': 'text/csv'
+            }).done(draw_comments_csv);
+        },
+        get: function get_comments() {
+            return comments;
+        },
+        add: function add_comment(data) {
+            var new_comment = [
+                data.comment,
+                data.user,
+                data.timestamp,
+                data.page
+            ];
+            comments.push(new_comment);
+            draw_new_comments([format_row(new_comment)]);
+        }
     };
 
 }

@@ -23,8 +23,12 @@ public partial class _Default : System.Web.UI.Page
             String line = "";
             line += "\"" + Request.Form["comment"] + "\"";
             line += ",\"" + Request.Form["user"] + "\"";
-            line += ",\"" + time.ToString(format) + "\"";
+            //line += ",\"" + time.ToString(format) + "\"";
+            line += ",\"" + Request.Form["timestamp"] + "\"";
             line += ",\"" + Request.Form["page"] + "\"";
+            // @HACK to make the url filter work. @TODO need to find out what is
+            // actually causing the string comparison bug and why this fixes it.
+            line += ",\"\"";
             if (!File.Exists(path))
             {
                 // Create a file to write to. 
