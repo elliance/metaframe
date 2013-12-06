@@ -190,7 +190,7 @@ function metaframe_embed_comments() {
     }
     $('.notes').append(get_structure_html());
     if (sessionStorage.getItem("metaframe_user")) {
-        $('#metaframe-user').val(decodeURIComponent(sessionStorage.getItem("metaframe_user")));
+        //$('#metaframe-user').val(decodeURIComponent(sessionStorage.getItem("metaframe_user")));
     }
     // setting up the comment display and submit handlers.
     var comments_handler = metaframe_comments_handler({
@@ -267,6 +267,8 @@ function metaframe_submit(props) {
         else {
             $('#metaframe-form-error').html("");
         }
+        $('#metaframe-user').val('');
+        $('#metaframe-user').focus();
         $('#metaframe-comment').val('');
         var now = new Date();
         now_minutes = now.getMinutes();
