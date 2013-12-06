@@ -187,16 +187,19 @@ h2.mf-comments-header {
 	}
     input[type=submit] {
         color: #fff;
-		font-weight: bold;
+		font-size: 1em;
         background-color: $blue-title;
-        padding: 1em;
-        display: block;
+        padding: .6em 1em;
 		border: 1px solid $blue-title;
 		border-radius: 5px;
         &:active {
             border: 1px solid #fff;
         }
     }
+	.shift-enter-submit {
+		padding-left: 1em;
+		color: #999696;
+	}
     &.error {
         input[type=text], textarea {
             border-color: #d13636;
@@ -278,6 +281,12 @@ h2.mf-comments-header {
 		border-bottom-left-radius: 0 !important;
 		@include border-top-radius(10px);
 		right: auto;
+		}
+
+		#metaframe-form {
+		    input[type=text], textarea {
+		        width: 85%;
+			}
 		}
 	} 
 

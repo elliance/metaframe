@@ -203,6 +203,11 @@ function metaframe_embed_comments() {
         csv_filename: csv_filename,
         form_action: form_action
     }));
+    $('.mf-comment-form').on('keypress', function () {
+        if (event.keyCode == 13 && event.shiftKey) {
+            $(this).trigger('submit');
+        }
+    });
     // have to call the comment handler once to load the first found of comments. 
     // after those are loaded, reloading them every 10 minutes. probably overkill, but
     // a good number if multiple people are working in a small period of time.
@@ -219,9 +224,10 @@ function metaframe_embed_comments() {
             structure +=
                 '<form method="post" id="metaframe-form" class="mf-comment-form">' +
                 '<div id="metaframe-form-error"></div>' +
-                '<input id="metaframe-user" type="text" placeholder="Your name goes here." />' +
-                '<textarea id="metaframe-comment" placeholder="Your comment goes here."></textarea>' +
-                '<input type="submit" value="Comment" />' +
+                '<input id="metaframe-user" type="text" placeholder="Name" />' +
+                '<textarea id="metaframe-comment" placeholder="Comment"></textarea>' +
+                '<input type="submit" value="Submit" />' +
+                '<span class="shift-enter-submit">Press Shift + Enter to Submit</span>' +
                 '</form>';
         }
         structure += '<div class="mf-comments"></div>';
@@ -275,7 +281,9 @@ function metaframe_submit(props) {
         if (now_minutes < 10) {
             now_minutes = "0" + now_minutes;
         }
-        data.timestamp = now.getMonth() + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now_minutes + " GMT" + now.getTimezoneOffset() / 60 * -1;
+        data.timestamp = (now.getMonth() + 1) + "/" + now.getDate() + "/" +
+            now.getFullYear() + " " + now.getHours() + ":" + now_minutes +
+            " GMT" + now.getTimezoneOffset() / 60 * -1;
         data.page = window.location.pathname;
         data.csv_filename = my.csv_filename;
         my.comments_handler.add(data);

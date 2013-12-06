@@ -16,7 +16,8 @@ public partial class _Default : System.Web.UI.Page
                 Response.Write(Request.Form[s]);
             
             }
-            String rootPath = Server.MapPath("~");
+            String rootPath = Server.MapPath(".");
+            //String rootPath = Environment.CurrentDirectory;
             String path = rootPath + "\\" + Request.Form["csv_filename"];
             DateTime time = DateTime.Now;              // Use current time
             string format = "MMM d HH:mm yyyy";        // Use this format
