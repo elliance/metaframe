@@ -1,3 +1,4 @@
+/* line 17, ../../../Program Files/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -19,47 +20,85 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
+/* line 22, ../../../Program Files/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
+/* line 24, ../../../Program Files/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
+/* line 26, ../../../Program Files/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
+/* line 28, ../../../Program Files/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
+/* line 30, ../../../Program Files/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
+/* line 103, ../../../Program Files/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
+/* line 32, ../../../Program Files/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
+/* line 116, ../../../Program Files/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
 
+@-webkit-keyframes growHeight {
+  /* line 8, ../sass/metaframe.scss */
+  to {
+    max-height: 100%;
+    opacity: 1;
+    padding-bottom: 1em;
+  }
+}
+
+@-moz-keyframes growHeight {
+  /* line 16, ../sass/metaframe.scss */
+  to {
+    max-height: 100%;
+    opacity: 1;
+    padding-bottom: 1em;
+  }
+}
+
+@keyframes growHeight {
+  /* line 24, ../sass/metaframe.scss */
+  to {
+    max-height: 100%;
+    opacity: 1;
+    padding-bottom: 1em;
+  }
+}
+
+/* line 34, ../sass/metaframe.scss */
 body {
   font-family: Arial, Helvetica, san-serif;
 }
+/* line 39, ../sass/metaframe.scss */
 body .hide {
   display: none;
 }
+/* line 44, ../sass/metaframe.scss */
 body .notes-anchor {
   width: 45px;
   height: 36px;
@@ -86,10 +125,12 @@ body .notes-anchor {
   text-align: center;
   padding: 10px 0 0 0 !important;
 }
+/* line 62, ../sass/metaframe.scss */
 body .notes-anchor figure {
   font-size: 26px;
   line-height: 100%;
 }
+/* line 76, ../sass/metaframe.scss */
 body .notes {
   width: 300px;
   position: fixed;
@@ -104,12 +145,14 @@ body .notes {
   overflow: auto;
   right: -330px;
 }
+/* line 91, ../sass/metaframe.scss */
 body .notes h1 {
   font-size: 2em;
   font-weight: 600;
   font-family: Arial, Helvetica, san-serif;
   color: #CCC;
 }
+/* line 94, ../sass/metaframe.scss */
 body .notes h2 {
   font-size: 1.5em;
   font-weight: 600;
@@ -117,10 +160,12 @@ body .notes h2 {
   padding: 20px 0 20px 0;
   color: #2998c7;
 }
+/* line 99, ../sass/metaframe.scss */
 body .notes .note-holder {
   padding-bottom: 25px;
   width: 95%;
 }
+/* line 105, ../sass/metaframe.scss */
 body .notes .note-count {
   width: 20px;
   height: 24px;
@@ -147,12 +192,15 @@ body .notes .note-count {
   top: -5px;
   position: relative;
 }
+/* line 124, ../sass/metaframe.scss */
 body .notes span {
   color: #fff;
 }
+/* line 129, ../sass/metaframe.scss */
 body .notes #noteBox {
   margin-top: 20px;
 }
+/* line 134, ../sass/metaframe.scss */
 body .notes .note-body {
   display: block;
   font-family: Arial, Helvetica, san-serif;
@@ -160,6 +208,7 @@ body .notes .note-body {
   line-height: 1.4em;
   padding-left: 45px;
 }
+/* line 146, ../sass/metaframe.scss */
 body .notes-tab {
   position: fixed;
   z-index: 99;
@@ -183,10 +232,101 @@ body .notes-tab {
   color: #fff;
   text-decoration: none;
 }
+/* line 165, ../sass/metaframe.scss */
+body h2.mf-comments-header {
+  padding-bottom: 0px;
+}
+/* line 169, ../sass/metaframe.scss */
+body #metaframe-form {
+  font-size: .9em;
+  padding-bottom: 1em;
+}
+/* line 172, ../sass/metaframe.scss */
+body #metaframe-form input[type=text], body #metaframe-form textarea {
+  font-size: 1.2em;
+  font-family: Arial, Helvetica, san-serif;
+  width: 95%;
+  border: 2px solid #ccc;
+  box-shadow: inset 0 1px 3px #ddd;
+  padding: .5em .6em;
+  margin-bottom: .2em;
+}
+/* line 181, ../sass/metaframe.scss */
+body #metaframe-form input[type=text]:focus, body #metaframe-form textarea:focus {
+  border-color: #2998c7;
+}
+/* line 185, ../sass/metaframe.scss */
+body #metaframe-form textarea {
+  height: 10em;
+}
+/* line 188, ../sass/metaframe.scss */
+body #metaframe-form input[type=submit] {
+  color: #fff;
+  font-size: 1em;
+  background-color: #2998c7;
+  padding: .6em 1em;
+  border: 1px solid #2998c7;
+  border-radius: 5px;
+}
+/* line 195, ../sass/metaframe.scss */
+body #metaframe-form input[type=submit]:active {
+  border: 1px solid #fff;
+}
+/* line 199, ../sass/metaframe.scss */
+body #metaframe-form .shift-enter-submit {
+  padding-left: 1em;
+  color: #999696;
+}
+/* line 204, ../sass/metaframe.scss */
+body #metaframe-form.error input[type=text], body #metaframe-form.error textarea {
+  border-color: #d13636;
+}
+/* line 209, ../sass/metaframe.scss */
+body #metaframe-form-error {
+  color: #d13636;
+  height: 1em;
+  font-size: 1em;
+}
+/* line 215, ../sass/metaframe.scss */
+body .mf-comments {
+  -webkit-transition: all 2s ease;
+  transition: all 2s ease;
+  position: relative;
+  line-height: 1.4em;
+}
+/* line 221, ../sass/metaframe.scss */
+body .mf-comments div {
+  /*padding-top: 1em;*/
+  /*padding-bottom: 1em;*/
+  max-height: 0;
+  opacity: 0;
+  -webkit-animation: growHeight 0.5s ease forwards;
+  -moz-animation: growHeight 0.5s ease forwards;
+  animation: growHeight 0.5s ease forwards;
+  line-height: 1.4em;
+}
+/* line 231, ../sass/metaframe.scss */
+body .mf-comments div span.mf-comment {
+  font-size: 1em;
+  display: block;
+}
+/* line 235, ../sass/metaframe.scss */
+body .mf-comments div span.mf-comment-user {
+  font-size: .8em;
+  color: #999696;
+}
+/* line 239, ../sass/metaframe.scss */
+body .mf-comments div span.mf-comment-timestamp {
+  font-size: .8em;
+  padding-left: 1em;
+  color: #999696;
+}
 @media screen and (max-width: 700px) {
+  /* line 254, ../sass/metaframe.scss */
   body .bottom {
     right: auto !important;
   }
+  /* line 257, ../sass/metaframe.scss */
   body .notes {
     width: 100%;
     height: 300px;
@@ -197,6 +337,7 @@ body .notes-tab {
     border-top: 10px solid #00b7ea;
     border-left: none;
   }
+  /* line 271, ../sass/metaframe.scss */
   body .notes-tab {
     width: 100px;
     height: 5px;
@@ -216,20 +357,34 @@ body .notes-tab {
     border-top-right-radius: 10px;
     right: auto;
   }
+  /* line 287, ../sass/metaframe.scss */
+  body #metaframe-form input[type=text], body #metaframe-form textarea {
+    width: 85%;
+  }
 }
+/* line 296, ../sass/metaframe.scss */
 body ::-webkit-scrollbar {
   width: 12px;
 }
+/* line 302, ../sass/metaframe.scss */
 body ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px #333;
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
+/* line 310, ../sass/metaframe.scss */
 body ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
   background: #666;
 }
+/* line 316, ../sass/metaframe.scss */
 body ::-webkit-scrollbar-thumb:window-inactive {
   background: #CCC;
+}
+
+/* line 324, ../sass/metaframe.scss */
+.lt-ie9 .mf-comments div {
+  max-height: 100%;
+  padding-bottom: 1em;
 }

@@ -4,6 +4,31 @@
 
 // Metaframes SCSS
 
+@-webkit-keyframes growHeight {
+  to { 
+    max-height: 100%;
+    opacity: 1;
+	padding-bottom: 1em;
+  }
+}
+
+@-moz-keyframes growHeight {
+  to { 
+    max-height: 100%;
+    opacity: 1;
+	padding-bottom: 1em;
+  }
+}
+
+@keyframes growHeight {
+  to { 
+    max-height: 100%;
+    opacity: 1;
+	padding-bottom: 1em;
+  }
+}
+
+
 // Note anchor
 
 body {
@@ -137,6 +162,89 @@ right: -330px;
 	text-decoration: none;
 }
 
+h2.mf-comments-header {
+	padding-bottom: 0px;
+}
+
+#metaframe-form {
+	font-size: .9em;
+    padding-bottom: 1em;
+    input[type=text], textarea {
+		font-size: 1.2em;
+		font-family: Arial, Helvetica, san-serif;
+        width: 95%;
+		border: 2px solid #ccc;
+		box-shadow: inset 0 1px 3px #ddd;
+		padding: .5em .6em;
+		margin-bottom: .2em;
+
+		&:focus {
+			border-color: $blue-title;
+		}
+    }
+	textarea {
+		height: 10em;
+	}
+    input[type=submit] {
+        color: #fff;
+		font-size: 1em;
+        background-color: $blue-title;
+        padding: .6em 1em;
+		border: 1px solid $blue-title;
+		border-radius: 5px;
+        &:active {
+            border: 1px solid #fff;
+        }
+    }
+	.shift-enter-submit {
+		padding-left: 1em;
+		color: #999696;
+	}
+    &.error {
+        input[type=text], textarea {
+            border-color: #d13636;
+        }
+    }
+}
+#metaframe-form-error {
+    color: #d13636;
+    height: 1em;
+    font-size: 1em;
+}
+
+.mf-comments {
+	-webkit-transition: all 2s ease;
+	transition: all 2s ease;
+	position: relative;
+	line-height: 1.4em;
+	margin-bottom: 2em;
+
+    div {
+		/*padding-top: 1em;*/
+		/*padding-bottom: 1em;*/ 
+		max-height: 0;
+		opacity: 0;
+		-webkit-animation: growHeight 0.5s ease forwards;
+		-moz-animation: growHeight 0.5s ease forwards;
+		animation: growHeight 0.5s ease forwards;
+		line-height: 1.4em;
+
+        span.mf-comment {
+            font-size: 1em;
+			display: block;
+        }
+        span.mf-comment-user {
+            font-size: .8em;
+            color: #999696;
+        }
+        span.mf-comment-timestamp {
+            font-size: .8em;
+			padding-left: 1em;
+			color: #999696;
+        }
+
+    }
+}
 
 // Media querie to push notes to bottom of page below 700px
 
@@ -175,6 +283,12 @@ right: -330px;
 		@include border-top-radius(10px);
 		right: auto;
 		}
+
+		#metaframe-form {
+		    input[type=text], textarea {
+		        width: 85%;
+			}
+		}
 	} 
 
 
@@ -205,4 +319,13 @@ right: -330px;
 	}
 }
 
+.lt-ie9 {
+	.mf-comments {
+
+		div {
+			max-height: 100%;
+			padding-bottom: 1em;
+		}
+	}
+}
 
