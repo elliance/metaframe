@@ -37,6 +37,41 @@ module.exports = function (grunt) {
         jshint: {
             all: ['js/metaframe.js']
         },
+
+        compress: {
+            nocomments: {
+                options: {
+                  archive: 'install/metaframe-nocomments.zip',
+                },
+                files: [
+                  {src: ['images/**'], cwd: 'build/', expand: true },
+                  {src: ['js/**'], cwd: 'build/', expand: true },
+                  {src: ['css/**'], cwd: 'build/', expand: true },
+                ]
+            },
+            phpcomments: {
+                options: {
+                  archive: 'install/metaframe-php-comments.zip',
+                },
+                files: [
+                  {src: ['images/**'], cwd: 'build/', expand: true },
+                  {src: ['js/**'], cwd: 'build/', expand: true },
+                  {src: ['css/**'], cwd: 'build/', expand: true },
+                  {src: ['metaframe-form-submit.php'], cwd: 'build/', expand: true },
+                ]
+            },
+            aspxcomments: {
+                options: {
+                  archive: 'install/metaframe-aspx-comments.zip',
+                },
+                files: [
+                  {src: ['images/**'], cwd: 'build/', expand: true },
+                  {src: ['js/**'], cwd: 'build/', expand: true },
+                  {src: ['css/**'], cwd: 'build/', expand: true },
+                  {src: ['metaframe-form-submit.aspx*'], cwd: 'build/', expand: true },
+                ]
+            }
+        },
         
         watch: {
             css: {
