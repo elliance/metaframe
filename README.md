@@ -38,9 +38,11 @@ or these two lines of code for .NET installation:
     <meta name="metaframe-form" content="metaframe-form-submit.aspx"/>
 
 
-####IMPORTANT! Make sure either PHP or .NET has writable file permissions to the directory where you are sending the comments or none of this is going to work out.
+#####! Make sure either PHP or .NET has writable file permissions to the directory where you are sending the comments or none of this is going to work out.
 NB: You can change the location and name file to which the comments will write by modifying the name in the tags above.
+
 NB #2: You can disable commenting by removing the meta tag named "metaframe-form".
+
 NB #3: You can also hide all comments that have been submitted by removing the meta tag named "metaframe-csv".
 
 ##Use
@@ -59,7 +61,7 @@ And here's what it looks like in a real, live web page: http://metaframe.ellianc
 ###To Download Comments
 To get the CSV containing the comments, go to the URL of your project and the path to your CSV, and your browser will downloada the file. The output is a little ugly at the moment because of the encoding we're doing. We're working on a better way to get this, so watch this repository for improvements to come.
 
-####IMPORTANT! Back up your CSV file. You can use cron with wget and curl, or a similar method, to download the CSV file routinely.
+#####! Back up your CSV file. You can use cron with wget and curl, or a similar method, to download the CSV file routinely.
 
 ##How it works
 Metaframe crawls the DOM looking for instances of the class, "notation" and, when it finds one, it uses magic to add the subsequent contents of "notes" to the panel overlay.
