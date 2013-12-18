@@ -13,7 +13,15 @@ In the /install directory, choose the zip file you want, and put the contents in
 Alternatively, if you want to pick and choose which parts to install, you can grab all needed files from the /build directory.
 
 ###Reference The Files
-A basic installation simply requires you to reference metaframe.css and metaframe-1.2.0.min.js. The CSS contains a reset (compass reset) in addition to the note styles. Reference metaframe.css inside the document's head along with your other external style sheets. Reference metaframe-[version].min.js immediately before the close of the body.
+A basic installation simply requires you to reference metaframe.css and metaframe-1.2.0.min.js. The CSS contains a reset (compass reset) in addition to the note styles.
+
+Reference metaframe.css inside the document's head along with your other external style sheets:
+
+    <link rel="stylesheet" href="css/metaframe.css" />
+    
+Then reference metaframe-[version].min.js immediately before the close of the body:
+
+    <script type="text/javascript" src="js/metaframe-1.2.0.min.js"></script>
 
 ###Add Commenting
 You can add commenting by adding the two lines of code below for PHP installation:
@@ -39,11 +47,11 @@ NB #3: You can also hide all comments that have been submitted by removing the m
 Get ready because this is stupid simple. For the element you want to notate, add the following attributes to the HTML tag:
 class="notation" note="[your note here, but without the brackets]". You don't have to add numbers to the notes. Metaframe numbers notes automatically, so you only have to keep track of the notes themselves, and they're always located in the HTML element's tag.
 
-Let's say you want to annotate a section on your page with the text, "By default, this section will contain the three most recent featured stories." And let's say the display styles for this section are in the CSS pseudoclass called "features". 
+Let's say you want to annotate a section on your page with the text, "By default, this section will contain three featured stories." And let's say the display styles for this section are in the CSS pseudoclass called "features". 
 Here's what it would look like: 
 
 
-    <section class="features notation" note="By default, this section will contain the three most recent featured stories.">
+    <section class="features notation" note="By default, this section will contain three featured stories.">
 
 
 And here's what it looks like in a real, live web page: http://metaframe.elliance.com
